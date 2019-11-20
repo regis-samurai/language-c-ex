@@ -1,10 +1,28 @@
 #include <stdio.h>
 #include <string.h>
 
+
+int Divisibilidade( int num )
+{
+    int res = 0;
+
+    while( num > 0 )
+    {
+        res += num % 10;
+        num /= 10;
+    }
+
+    if(res > 9)
+        return Divisibilidade( res );
+    else
+        return (res);
+}
+
 int main(void){
 
   char matriz[3][9];
   char nome[60];
+  int qtd = 0;
 
   matriz[0][0] = 'a';
   matriz[0][1] = 'b';
@@ -37,32 +55,17 @@ int main(void){
 
   printf("Digite seu nome: ");
   fgets(nome, 60, stdin);
-  printf("Length: %zu", strlen(nome));
-  printf("o nome: %s", nome);
 
   for(int i = 0; i <= strlen(nome); i++){
     for(int l = 0; l <= 2; l ++){
       for(int c = 0; c <= 8; c++){
         if(matriz[l][c] == nome[i]){
-          printf("%d + ", c + 1);
-          // printf("Letra: %c", nome[i]);
+          qtd += c + 1;
         }
       }
     }
   }
 
-  // for(int l = 0; l <= 2; l ++){
-  //   for(int c = 0; c <= 8; c++){
-  //     for(int i = 0; i <= strlen(nome); i++) {
-  //       // if(matriz[l][c] == nome[i]){
-  //       //   printf("Elemento %d posicao da matriz: %c", i, matriz[l][c]);
-  //       // }
-  //       printf("Letra: %c", nome[i]);
-  //     }
-  //     // printf("Valor da matriz [%c] na posicao [%d][%d] da matriz A: ",matriz[l][c], l, c);
-  //   }
-  // }
-
-  
-  return 0;
+  printf("O numero restante e %d .\n", Divisibilidade(qtd));
+  return (0);
 }
